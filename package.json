@@ -1,0 +1,22 @@
+{
+  "name": "video-chunk",
+  "version": "1.0.0",
+  "description": "partir video en partes iguales",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "video",
+    "node"
+  ],
+  "author": "joneldiablo",
+  "license": "ISC",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "fluent-ffmpeg": "^2.1.2"
+  },
+  "bin": {
+    "execute": "index.js"
+  }
+}
