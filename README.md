@@ -5,6 +5,7 @@ Split a video in equal parts
 install:
 
 ```shell
+sudo apt install ffmpeg
 npm install -g video-chunk
 ```
 
