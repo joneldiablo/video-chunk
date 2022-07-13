@@ -1,14 +1,16 @@
 {
   "name": "video-chunk",
-  "version": "1.0.3",
-  "description": "partir video en partes iguales",
+  "version": "1.0.5",
+  "description": "Split a video in equal parts",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "video",
-    "node"
+    "node",
+    "ffmpeg",
+    "split"
   ],
   "author": "joneldiablo",
   "license": "ISC",
@@ -17,6 +19,6 @@
     "fluent-ffmpeg": "^2.1.2"
   },
   "bin": {
-    "execute": "index.js"
+    "videoChunk": "index.js"
   }
 }
