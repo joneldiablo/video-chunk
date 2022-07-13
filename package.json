@@ -1,6 +1,6 @@
 {
   "name": "video-chunk",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Split a video in equal parts",
   "main": "index.js",
   "scripts": {
