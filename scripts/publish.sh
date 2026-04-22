@@ -1,4 +1,4 @@
-node ./update.js
+node ./scripts/update.js
 git add .
 git commit -m "$1"
 git push origin --all
