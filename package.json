@@ -1,6 +1,6 @@
 {
   "name": "video-chunk",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Split a video in equal parts",
   "main": "dist/cli.js",
   "scripts": {
