@@ -33,6 +33,7 @@ COPY --from=frontend-builder /app/frontend/dist ./frontend
 ENV PORT=3000
 ENV ENABLE_FRONTEND=true
 ENV NODE_ENV=production
+ENV FRONTEND_PATH=/app/frontend
 
 # Expose the server port
 EXPOSE 3000

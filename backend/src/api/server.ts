@@ -111,8 +111,7 @@ export async function startServer(port: number, enableFrontend: boolean) {
   });
 
   if (enableFrontend) {
-    const baseDir = path.join(__dirname, '..', '..', '..');
-    const frontendDist = path.join(baseDir, 'frontend');
+    const frontendDist = process.env.FRONTEND_PATH || path.join(__dirname, '..', '..', '..', 'frontend');
     console.log('Serving frontend from:', frontendDist);
     app.use(express.static(frontendDist));
     app.use((req, res) => {
