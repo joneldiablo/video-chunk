@@ -1,2 +1,8 @@
-update.js
-update.sh
+node_modules/
+.env
+*.log
+frontend/
+backend/tests/
+reports/
+scripts
+# We keep dist/ because it's needed for NPM

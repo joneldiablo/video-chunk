@@ -1,1 +1,12 @@
-node_modules
+node_modules/
+dist/
+.env
+*.log
+
+# Temporary files
+backend/tmp/*
+!backend/tmp/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
