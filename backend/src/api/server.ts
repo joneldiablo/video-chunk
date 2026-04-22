@@ -8,14 +8,19 @@ import { VideoChunkConfig } from '../models/video';
 import { generateJobId } from '../utils/fileUtils';
 
 const videoService = new VideoService();
-const upload = multer({ dest: 'backend/tmp/' });
+const __rootDir = path.join(__dirname, '..');
+const __tmpDir = path.join(__rootDir, 'tmp');
+
+fs.mkdir(__tmpDir, { recursive: true }).catch(() => {});
+
+const upload = multer({ dest: __tmpDir });
 
 export async function startServer(port: number, enableFrontend: boolean) {
   const app = express();
   app.use(express.json());
 
   // Serve tmp files for preview
-  app.use('/tmp', express.static(path.join(process.cwd(), 'backend/tmp')));
+  app.use('/tmp', express.static(__tmpDir));
 
   // API endpoints
   app.post('/api/upload', upload.single('video'), async (req, res) => {
@@ -29,7 +34,7 @@ export async function startServer(port: number, enableFrontend: boolean) {
 
     const jobId = generateJobId();
     const ext = path.extname(decodedFileName);
-    const finalPath = path.join('backend/tmp', `${jobId}${ext}`);
+    const finalPath = path.join(__tmpDir, `${jobId}${ext}`);
     
     await fs.rename(req.file.path, finalPath);
 
@@ -47,8 +52,8 @@ export async function startServer(port: number, enableFrontend: boolean) {
       return res.status(400).json({ error: 'Missing required parameters' });
     }
 
-    const outputDir = path.join('backend/tmp', jobId);
-    const absoluteInputPath = path.join(process.cwd(), filePath.replace('/tmp', 'backend/tmp'));
+    const outputDir = path.join(__tmpDir, jobId);
+    const absoluteInputPath = path.join(__tmpDir, filePath.replace('/tmp/', ''));
 
     try {
       const results = await videoService.processVideo({
@@ -70,7 +75,7 @@ export async function startServer(port: number, enableFrontend: boolean) {
 
   app.get('/api/download/:jobId', async (req, res) => {
     const { jobId } = req.params;
-    const outputDir = path.join(process.cwd(), 'backend/tmp', jobId);
+    const outputDir = path.join(__tmpDir, jobId);
 
     try {
       const zip = new AdmZip();
@@ -88,7 +93,7 @@ export async function startServer(port: number, enableFrontend: boolean) {
           await fs.rm(outputDir, { recursive: true, force: true });
 
           // 2. Remove the original uploaded file (matches jobId.*)
-          const tmpDir = path.join(process.cwd(), 'backend/tmp');
+          const tmpDir = __tmpDir;
           const files = await fs.readdir(tmpDir);
           const filesToDelete = files.filter(file => file.startsWith(jobId) && file !== jobId);
           
@@ -106,10 +111,11 @@ export async function startServer(port: number, enableFrontend: boolean) {
   });
 
   if (enableFrontend) {
-    console.log('Serving frontend from /frontend/dist');
-    app.use(express.static(path.join(process.cwd(), 'frontend/dist')));
+    const frontendDist = path.join(__rootDir, '..', '..', 'frontend');
+    console.log('Serving frontend from:', frontendDist);
+    app.use(express.static(frontendDist));
     app.use((req, res) => {
-      res.sendFile(path.join(process.cwd(), 'frontend/dist/index.html'));
+      res.sendFile(path.join(frontendDist, 'index.html'));
     });
   }
 

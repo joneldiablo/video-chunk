@@ -1,8 +1,10 @@
 #!/usr/bin/env node
+import path from 'path';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { VideoService } from './backend/src/services/VideoService';
-import { startServer } from './backend/src/api/server';
+
+const { VideoService } = require(path.join(__dirname, 'backend', 'src', 'services', 'VideoService.js'));
+const { startServer } = require(path.join(__dirname, 'backend', 'src', 'api', 'server.js'));
 
 async function main() {
   const argv = await yargs(hideBin(process.argv))
@@ -51,7 +53,7 @@ async function main() {
             chunkDuration: argv.duration as number,
           });
           console.log('Processing complete. Chunks created:');
-          results.forEach((r) => console.log(`- Chunk ${r.chunkIndex}: ${r.filePath}`));
+          results.forEach((r: any) => console.log(`- Chunk ${r.chunkIndex}: ${r.filePath}`));
         } catch (err) {
           console.error('Processing failed:', err);
           process.exit(1);

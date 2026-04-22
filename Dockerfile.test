@@ -1,0 +1,19 @@
+FROM node:22-alpine
+
+RUN apk add --no-cache ffmpeg
+
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+COPY dist ./dist
+COPY node_modules ./node_modules
+
+RUN npm install -g .
+
+RUN mkdir -p /test
+
+COPY backend/tmp/Corrección_de_Pantalla_Verde_en_Video.mp4 /test/video.mp4
+
+WORKDIR /test
+
+CMD ["videoChunk", "--help"]

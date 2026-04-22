@@ -5,7 +5,10 @@
   "main": "dist/cli.js",
   "scripts": {
     "start": "bun run cli.ts",
-    "build": "tsc",
+    "build": "bun run build:all",
+    "build:all": "bun run build:frontend && bun run build:backend && cp -r frontend/dist dist/frontend",
+    "build:frontend": "cd frontend && bun run build",
+    "build:backend": "tsc",
     "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,6 +33,8 @@
   },
   "private": false,
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^29.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.3",
     "@types/adm-zip": "^0.5.8",
     "@types/express": "^5.0.6",
     "@types/fluent-ffmpeg": "^2.1.28",
@@ -37,6 +42,7 @@
     "@types/node": "^25.6.0",
     "@types/supertest": "^7.2.0",
     "@types/yargs": "^17.0.35",
+    "rollup": "^4.60.2",
     "supertest": "^7.2.2",
     "typescript": "^5.9.3"
   }
