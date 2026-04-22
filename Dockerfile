@@ -27,7 +27,7 @@ COPY agents/ ./agents/
 COPY cli.ts .
 
 # Copy built frontend from previous stage
-COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
+COPY --from=frontend-builder /app/frontend/dist ./frontend
 
 # Set environment variables
 ENV PORT=3000
