@@ -5,4 +5,6 @@ const parts = p.version.split('.');
 parts[parts.length - 1] = 1 + (Number(parts[parts.length - 1]));
 p.version = parts.join('.');
 
-fs.writeFileSync('../package.json', JSON.stringify(p, null, 2));
+console.log(p.version);
+
+fs.writeFileSync('./package.json', JSON.stringify(p, null, 2));
