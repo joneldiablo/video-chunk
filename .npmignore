@@ -1,8 +1,7 @@
 node_modules/
 .env
 *.log
-frontend/
 backend/tests/
 reports/
 scripts
-# We keep dist/ because it's needed for NPM
+# We keep dist/ and frontend/ because they're needed for NPM
