@@ -20,6 +20,11 @@ async function main() {
       description: 'Enable the administration frontend',
       default: process.env.ENABLE_FRONTEND === 'true',
     })
+    .option('frontend-path', {
+      type: 'string',
+      description: 'Path to frontend build (env: FRONTEND_PATH)',
+      default: process.env.FRONTEND_PATH,
+    })
     .command(
       'process',
       'Process a video into chunks',
@@ -65,6 +70,9 @@ async function main() {
       'Start the web server',
       () => {},
       async (argv) => {
+        if (argv.frontendPath) {
+          process.env.FRONTEND_PATH = argv.frontendPath as string;
+        }
         await startServer(argv.port as number, argv.frontend as boolean);
       }
     )

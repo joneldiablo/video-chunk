@@ -53,6 +53,7 @@ The system allows configuration via environment variables or CLI flags. CLI flag
 | :--- | :--- | :--- | :--- | :--- |
 | `PORT` | `-p, --port` | `3000` | Server port | Defines the port where the Express server will listen. |
 | `ENABLE_FRONTEND` | `-f, --frontend` | `false` | Enable Admin UI | If `true`, the server serves the Vue administration panel. |
+| `FRONTEND_PATH` | `--frontend-path` | Auto-detected | Frontend path | Path to the frontend build directory. Useful for custom installations. |
 
 **Example using Environment Variables:**
 ```bash

@@ -86,6 +86,12 @@
                   <td><code>false</code></td>
                   <td>Enables the Vue administration panel.</td>
                 </tr>
+                <tr>
+                  <td><code>FRONTEND_PATH</code></td>
+                  <td><code>--frontend-path</code></td>
+                  <td>Auto-detected</td>
+                  <td>Custom path to frontend build directory.</td>
+                </tr>
               </tbody>
             </table>
           </div>
