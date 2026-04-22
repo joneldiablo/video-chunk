@@ -50,18 +50,22 @@ node dist/cli.js server --frontend # Run built version (prod test)
 ## Testing
 
 ### Dockerfile.test.local
-Tests installation from local build:
+Tests installation from local build (before publishing):
 ```bash
 docker build -f Dockerfile.test.local -t video-chunk-test .
 docker run --rm video-chunk-test videoChunk process -i video.mp4 -o /tmp/output -d 2
 ```
 
+Copies: `package.json`, `dist/`, `node_modules/`
+
 ### Dockerfile.test
-Tests installation from npm registry:
+Tests installation from npm registry (production simulation):
 ```bash
 docker build -f Dockerfile.test -t video-chunk-npm .
 docker run --rm video-chunk-npm videoChunk process -i video.mp4 -o /tmp/output -d 2
 ```
+
+Uses: `npm install -g video-chunk` (assumes package is published)
 
 ## Key Files
 
